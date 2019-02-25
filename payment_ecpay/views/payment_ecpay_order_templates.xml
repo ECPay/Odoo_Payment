@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="assets_frontend_logistic_ecpay">
+        <xpath expr="." position="inside">
+            <script src="/payment_ecpay/static/src/js/selection.js"></script>
+        </xpath>
+    </template>
+    <template id="ecpay_payment_type" name="ECPay Payment Type" inherit_id="payment.payment_tokens_list">
+        <xpath expr="//div[hasclass('pull-right')]" position="before">
+            <div class="form-group">
+                <t t-set="ecpay" t-value="request.env['payment.acquirer'].sudo().search([('provider', '=', 'ecpay')], limit=1)" />
+                <select class="form-control" id="ecpay_payment_method" name="ecpay_payment_method">
+                    <t t-if="ecpay.ecpay_credit">
+                        <option value="Credit" select="selected">信用卡一次付清</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_credit_installment_3">
+                        <option value="CreditInstallment3">信用卡分期付款(3期)</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_credit_installment_6">
+                        <option value="CreditInstallment6">信用卡分期付款(6期)</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_credit_installment_12">
+                        <option value="CreditInstallment12">信用卡分期付款(12期)</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_credit_installment_18">
+                        <option value="CreditInstallment18">信用卡分期付款(18期)</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_credit_installment_24">
+                        <option value="CreditInstallment24">信用卡分期付款(24期)</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_googlepay">
+                        <option value="GooglePay">GooglePay</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_webatm">
+                        <option value="WebATM">網路 ATM</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_atm">                    
+                        <option value="ATM">自動櫃員機 ATM</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_cvs">
+                        <option value="CVS">超商代碼</option>
+                    </t>
+                    <t t-if="ecpay.ecpay_barcode">
+                        <option value="BARCODE">超商條碼</option>
+                    </t>
+                </select>
+            </div>
+        </xpath>
+    </template>
+</odoo>

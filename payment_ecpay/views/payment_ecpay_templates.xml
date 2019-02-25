@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <template id="ecpay_form">
+            <div>
+                <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
+                <t t-foreach="parameters" t-as="parameter">
+                    <input type="hidden" t-att-name="parameter" t-att-value="parameter_value" />
+                </t>
+            </div>
+        </template>
+    </data>
+</odoo>

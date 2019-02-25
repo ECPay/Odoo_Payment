@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+payment_ecpay_admin,Model admin access,model_order_ecpay_model,payment_ecpay.group_manager,1,1,1,1
+payment_ecpay_user,Model user access,model_order_ecpay_model,payment_ecpay.group_user,1,0,0,0

@@ -6,8 +6,8 @@
     'summary': 'Payment Acquirer: ECPay 綠界第三方金流模組',
     'version': '1.3',
     'description': """ECPay 綠界付款模組""",
-    'author' : '元植顧問',
-    'website' : 'https://www.yuanchih-consult.com/',
+	'author': 'ECPAY',
+    'website': 'http://www.ecpay.com.tw',
     'depends': ['payment'],
     'data': [
         'security/payment_ecpay_access_rule.xml',

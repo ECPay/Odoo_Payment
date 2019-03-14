@@ -8,9 +8,9 @@
     'description': """ECPay 綠界付款模組""",
 	'author': 'ECPAY',
     'website': 'http://www.ecpay.com.tw',
-	'icon': 'static/description/icon.png',
+	'icon': 'image/icon.png',
 	'license' : 'AGPL-3',
-	'images' : ['static/description/icon.png'],
+	'images' : ['image/1000x500.png'],
     'depends': ['payment'],
     'data': [
         'security/payment_ecpay_access_rule.xml',

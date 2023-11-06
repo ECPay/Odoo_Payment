@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ecpay_account_journal" model="account.journal">
+            <field name="name">ECPay</field>
+            <field name="code">ECPay</field>
+            <field name="type">bank</field>
+            <!--            <field name="inbound_payment_method_ids" eval="[(4, ref('payment_method_ecpay'))]"/>-->
+        </record>
+
+        <record id="payment_method_ecpay" model="account.payment.method">
+            <field name="name">ECPay</field>
+            <field name="code">ECPay</field>
+            <field name="payment_type">inbound</field>
+        </record>
+
+        <record id="payment_ecpay_provider_transfer" model="payment.provider">
+            <field name="name">貨到付款</field>
+            <field name="sequence">10</field>
+            <field name="image_128" type="base64" file="payment_ecpay/static/description/icon.png"/>
+            <field name="module_id" ref="base.module_payment_custom"/>
+            <field name="pending_msg" eval="False"/>
+            <field name="code">custom</field>
+            <field name="redirect_form_view_id" ref="redirect_form"/>
+            <field name="custom_mode">wire_transfer</field>
+        </record>
+
+        <function model="payment.provider"
+                  name="_transfer_ensure_pending_msg_is_set"
+                  eval="[[ref('payment_ecpay.payment_ecpay_provider_transfer')]]"/>
+
+
+
+
+        <record id="payment_provider_ecpay" model="payment.provider">
+            <field name="name">ECPay 綠界第三方支付</field>
+            <field name="image_128" type="base64" file="payment_ecpay/static/description/icon.png"/>
+            <field name="code">ECPay</field>
+            <field name="module_id" ref="base.module_payment_ecpay"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="pre_msg"><![CDATA[
+<p>按下付款按鈕後, 您將會被引導到綠界付款頁面</p>]]></field>
+            <field name="MerchantID">3002607</field>
+            <field name="HashKey">pwFHCqoQZGmho4w6</field>
+            <field name="HashIV">EkRm7iFT261dpevs</field>
+            <field name="redirect_form_view_id" ref="redirect_form"/>
+            <field name="support_fees">False</field>
+            <field name="support_refund">full_only</field>
+            <field name="support_manual_capture">False</field>
+            <field name="support_express_checkout">False</field>
+            <field name="support_tokenization">False</field>
+            <field name="journal_id" ref="payment_ecpay.ecpay_account_journal"/>
+        </record>
+
+    </data>
+</odoo>

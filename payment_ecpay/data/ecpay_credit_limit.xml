@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="ecpay_credit_limit_1" model="ecpay.credit.limit">
+            <field name="name">3</field>
+        </record>
+        <record id="ecpay_credit_limit_2" model="ecpay.credit.limit">
+            <field name="name">6</field>
+        </record>
+        <record id="ecpay_credit_limit_3" model="ecpay.credit.limit">
+            <field name="name">12</field>
+        </record>
+        <record id="ecpay_credit_limit_4" model="ecpay.credit.limit">
+            <field name="name">18</field>
+        </record>
+        <record id="ecpay_credit_limit_5" model="ecpay.credit.limit">
+            <field name="name">24</field>
+        </record>
+    </data>
+</odoo>

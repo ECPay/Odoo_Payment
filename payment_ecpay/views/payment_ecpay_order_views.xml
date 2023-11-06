@@ -1,82 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-  <record id="view_tree_order_ecpay" model="ir.ui.view">
-    <field name="name">綠界訂單列表</field>
-    <field name="model">order.ecpay.model</field>
-    <field name="arch" type="xml">
-      <tree>
-        <field name="MerchantTradeDate"/>
-        <field name="MerchantTradeNo"/>
-        <field name="TradeNo"/>
-        <field name="TradeAmt"/>
-        <field name="PaymentType"/>
-        <field name="RtnMsg"/>
-      </tree>
-    </field>
-  </record>
+    <record id="view_tree_order_ecpay" model="ir.ui.view">
+        <field name="name">綠界訂單列表</field>
+        <field name="model">order.ecpay.model</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="MerchantTradeDate"/>
+                <field name="MerchantTradeNo"/>
+                <field name="TradeNo"/>
+                <field name="TradeAmt"/>
+                <field name="PaymentType"/>
+                <field name="RtnMsg"/>
+                <field name="SimulatePaid"/>
+            </tree>
+        </field>
+    </record>
 
-  <record id="view_form_order_ecpay" model="ir.ui.view">
-    <field name="name">綠界訂單表單</field>
-    <field name="model">order.ecpay.model</field>
-    <field name="arch" type="xml">
-      <form edit='false' create='false'>
-        <sheet>
-          <group>
-            <group>
-              <field name="MerchantTradeDate"/>
-              <field name="ReferenceNo" attrs="{'invisible': [('ReferenceNo', '=', False)]}" readonly="1"/>
-              <field name="sale_order_id" attrs="{'invisible': [('sale_order_id', '=', False)]}" readonly="1"/>
-              <field name="MerchantTradeNo"/>
-              <field name="TradeNo"/>
-            </group>
-            <group>
-              <field name="PaymentDate"/>
-              <field name="PaymentType"/>
-              <field name="RtnCode"/>
-              <field name="TradeAmt"/>
-              <field name="RtnMsg"/>
-              <field name="card4no"/>
-              <field name="stage"/>
-            </group>
-            <group>
-              <field name="BankCode"/>
-              <field name="vAccount"/>
-              <field name="ExpireDate"/>
-            </group>
-            <group>
-              <field name="PaymentNo"/>
-            </group>
-            <group>
-              <field name="Barcode1"/>
-              <field name="Barcode2"/>
-              <field name="Barcode3"/>
-            </group>
-            <group>
-              <field name="InvoiceMark"/>
-            </group>
-          </group>
-        </sheet>
-      </form>
-    </field>
-  </record>
+    <record id="order_ecpay_view_form" model="ir.ui.view">
+        <field name="name">order_ecpay.view.form</field>
+        <field name="model">order.ecpay.model</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="MerchantTradeDate" readonly="1"/>
+                            <field name="MerchantTradeNo" readonly="1"/>
+                            <field name="ReferenceNo" readonly="1"/>
+                            <field name="TradeNo" readonly="1"/>
+                            <field name="TradeAmt" readonly="1"/>
+                            <field name="PaymentType" readonly="1"/>
+                            <field name="PaymentDate" readonly="1"/>
+                            <field name="SimulatePaid" readonly="1"/>
+                            <field name="RtnCode" readonly="1"/>
+                            <field name="card4no" readonly="1"/>
+                            <field name="stage" readonly="1"/>
+                            <field name="RtnMsg" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="InvoiceMark" readonly="1"/>
+                            <field name="BankCode" readonly="1"/>
+                            <field name="vAccount" readonly="1"/>
+                            <field name="ExpireDate" readonly="1"/>
+                            <field name="PaymentNo" readonly="1"/>
+                            <field name="Barcode1" readonly="1"/>
+                            <field name="Barcode2" readonly="1"/>
+                            <field name="Barcode3" readonly="1"/>
+                            <field name="sale_order_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-  <record id="view_ecpay_order_inherit_sale_order" model="ir.ui.view">
-    <field name="name">view ecpay order inherit sale order</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-      <xpath expr="//page/group/group[@name='technical']" position="before">
-        <group string="綠界金流訂單編號" name="trade_no">
-          <field name="ecpay_trade_no_id" readonly="1"/>
-        </group>
-      </xpath>
-    </field>
-  </record>
+    <record id="action_menuitem_order_ecpay" model="ir.actions.act_window">
+        <field name="name">綠界金流訂單</field>
+        <field name="res_model">order.ecpay.model</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-  <act_window id="action_menuitem_order_ecpay" name="綠界金流訂單" res_model="order.ecpay.model" view_mode="tree,form" />
-  <!-- target="new" /> -->
-
-  <menuitem id="menuitem_order_ecpay" name="綠界金流訂單" action="action_menuitem_order_ecpay" parent="website_sale.menu_orders" groups="payment_ecpay.group_user" sequence="5"/>
+    <menuitem id="menuitem_order_ecpay" name="綠界金流訂單" action="action_menuitem_order_ecpay"
+              parent="account.menu_finance_receivables" groups="payment_ecpay.group_user" sequence="20"/>
 
 </odoo>

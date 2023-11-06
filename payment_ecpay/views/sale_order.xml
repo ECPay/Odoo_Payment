@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="override_view_order_form" model="ir.ui.view">
+            <field name="name">override view order form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[@name='order_lines']/field[@name='order_line']"
+                       position="after">
+                    <field name="ecpay_info_ids">
+                        <tree create="false" delete="false" editable="top">
+                            <field name="MerchantTradeNo"/>
+                            <field name="PaymentDate"/>
+                            <field name="PaymentType"/>
+                            <field name="RtnCode"/>
+                            <field name="RtnMsg"/>
+                            <field name="TradeAmt"/>
+                            <field name="TradeNo"/>
+                            <field name="card4no"/>
+                            <field name="stage"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

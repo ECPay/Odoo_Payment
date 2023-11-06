@@ -2,56 +2,58 @@
 <odoo>
     <data>
 
-        <record id="acquirer_form_ecpay" model="ir.ui.view">
-            <field name="name">acquirer.form.ecpay</field>
-            <field name="model">payment.acquirer</field>
-            <field name="inherit_id" ref="payment.acquirer_form"/>
+        <record id="provider_form_ecpay" model="ir.ui.view">
+            <field name="name">provider.form.ecpay</field>
+            <field name="model">payment.provider</field>
+            <field name="inherit_id" ref="payment.payment_provider_form"/>
             <field name="arch" type="xml">
-                <xpath expr='//group[@name="acquirer"]' position='after'>
-                    <group attrs="{'invisible': [('provider', '!=', 'ecpay')]}">
+                <xpath expr="//group[@name='provider_credentials']" position="inside">
+                    <group attrs="{'invisible': [('code', '!=', 'ECPay')]}">
                         <group name="group_interface_setting" string="介接設定">
                             <field name="MerchantID"/>
                             <field name="HashKey"/>
                             <field name="HashIV"/>
                         </group>
+                    </group>
+                    <group attrs="{'invisible': [('code', '!=', 'ECPay')]}">
                         <group name="group_domain_setting" string="網域設定">
                             <field name="ecpay_domain"/>
                         </group>
-                        <group name="group_payment_method" string="信用卡付款方式設定">
-                            <group name="ecpay_credit_setting">
-                                <field name="ecpay_credit" class="oe_inline" />
-                                <field name="ecpay_credit_installment_3" class="oe_inline" />
-                                <field name="ecpay_credit_installment_6" class="oe_inline" />
-                                <field name="ecpay_credit_installment_12" class="oe_inline" />
-                                <field name="ecpay_credit_installment_18" class="oe_inline" />
-                                <field name="ecpay_credit_installment_24" class="oe_inline" />
-                            </group>
-                        </group>
-                        <group name="group_payment_method_other" string="其他付款方式設定">
-                            <group name="ecpay_other_setting">
-                                <field name="ecpay_googlepay"/>
-                                <field name="ecpay_webatm"/>
-                                <field name="ecpay_atm"/>
-                                <field name="ecpay_cvs"/>
-                                <field name="ecpay_barcode"/>
-                            </group>
-                        </group>
-                        <a colspan="2" href="https://www.ecpay.com.tw/Content/files/ecpay_011.pdf" target="_blank">綠界金流技術文件</a>
                     </group>
+                    <group name="group_payment_method" string="信用卡付款方式設定"
+                           attrs="{'invisible': [('code', '!=', 'ECPay')]}">
+                        <group name="ecpay_credit_setting">
+                            <field name="ecpay_credit" class="oe_inline"/>
+                            <field name="ecpay_credit_ids" widget="many2many_tags" class="oe_inline"/>
+                            <!--                            <field name="ecpay_credit_installment_3" class="oe_inline"/>-->
+                            <!--                            <field name="ecpay_credit_installment_6" class="oe_inline"/>-->
+                            <!--                            <field name="ecpay_credit_installment_12" class="oe_inline"/>-->
+                            <!--                            <field name="ecpay_credit_installment_18" class="oe_inline"/>-->
+                            <!--                            <field name="ecpay_credit_installment_24" class="oe_inline"/>-->
+                        </group>
+                    </group>
+                    <group name="group_payment_method_other" string="其他付款方式設定"
+                           attrs="{'invisible': [('code', '!=', 'ECPay')]}">
+                        <group name="ecpay_other_setting">
+                            <field name="ecpay_apple_pay"/>
+                            <field name="ecpay_webatm"/>
+                            <field name="ecpay_atm"/>
+                            <field name="ecpay_atm_expiredate"/>
+                            <field name="ecpay_cvs"/>
+                            <field name="ecpay_cvs_expiredate"/>
+                            <field name="ecpay_barcode"/>
+                            <field name="ecpay_barcode_expiredate"/>
+                            <field name="ecpay_bnpl_pay"/>
+                            <field name="ecpay_twqr_pay"/>
+                        </group>
+                    </group>
+                    <a colspan="2" href="https://developers.ecpay.com.tw/?p=2509" target="_blank"
+                       attrs="{'invisible': [('code', '!=', 'ECPay')]}">綠界金流技術文件
+                    </a>
                 </xpath>
             </field>
         </record>
 
-        <record id="transaction_form_ecpay" model="ir.ui.view">
-            <field name="name">acquirer.transaction.form.ecpay</field>
-            <field name="model">payment.transaction</field>
-            <field name="inherit_id" ref="payment.transaction_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='acquirer_reference']" position="after">
-                    <field name="ecpay_txn_type" readonly="1" attrs="{'invisible': [('provider', '!=', 'ecpay')]}"/>
-                </xpath>
-            </field>
-        </record>
 
     </data>
 </odoo>
